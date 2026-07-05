@@ -17,7 +17,7 @@
 
   /** @type {Photo[]} */
   const photos = [
-    { src: '/photos/garbanzo-0.jpg', alt: 'Garbanzo adorable de cerca dormido, primary: true },
+    { src: '/photos/garbanzo-0.jpg', alt: 'Garbanzo adorable de cerca dormido', primary: true },
     { src: '/photos/garbanzo-5.jpg', alt: 'Garbanzo en con mamachita sofá' },
     { src: '/photos/garbanzo-6.jpg', alt: 'Garbanzo dormiendo hacia la camara en el sofá' },
     { src: '/photos/garbanzo-1.jpg', alt: 'Garbanzo durmiendo en el sofá' },
@@ -99,11 +99,11 @@
   <meta property="og:title" content="⚠️ SE BUSCA: Garbanzo — Gato Perdido" />
   <meta property="og:description" content="Perdido desde el 3 de julio en Pedro Buzeta #277, Santa Tere. Blanco con gris, collar Rogz amarillo. Recompensa." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="/photos/garbanzo-1.jpg" />
+  <meta property="og:image" content="/photos/garbanzo-0.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="⚠️ SE BUSCA: Garbanzo — Gato Perdido" />
   <meta name="twitter:description" content="Perdido desde el 3 de julio en Santa Tere, GDL. Recompensa." />
-  <meta name="twitter:image" content="/photos/garbanzo-1.jpg" />
+  <meta name="twitter:image" content="/photos/garbanzo-0.jpg" />
 </svelte:head>
 
 <svelte:window on:keydown={handleKeydown} />
