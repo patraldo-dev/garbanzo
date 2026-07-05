@@ -1,8 +1,21 @@
 <script>
-  let { data } = $props();
+  /**
+   * @typedef {Object} Photo
+   * @property {string} src
+   * @property {string} alt
+   * @property {boolean} [primary]
+   */
 
-  let lightboxSrc = $state(null);
+  /**
+   * @typedef {Object} Contact
+   * @property {string} label
+   * @property {string} detail
+   * @property {string} href
+   * @property {string} icon
+   * @property {string} color
+   */
 
+  /** @type {Photo[]} */
   const photos = [
     { src: '/photos/garbanzo-1.jpg', alt: 'Garbanzo durmiendo en el sofá', primary: true },
     { src: '/photos/garbanzo-2.jpg', alt: 'Garbanzo en el jardín' },
@@ -10,6 +23,7 @@
     { src: '/photos/garbanzo-4.jpg', alt: 'Garbanzo caminando' },
   ];
 
+  /** @type {Contact[]} */
   const contacts = [
     {
       label: 'WhatsApp: Cris',
@@ -41,6 +55,12 @@
     },
   ];
 
+  /** @type {string | null} */
+  let lightboxSrc = $state(null);
+
+  /**
+   * @param {string} src
+   */
   function openLightbox(src) {
     lightboxSrc = src;
   }
@@ -62,6 +82,9 @@
     }
   }
 
+  /**
+   * @param {KeyboardEvent} e
+   */
   function handleKeydown(e) {
     if (e.key === 'Escape') closeLightbox();
   }
@@ -151,12 +174,10 @@
   <section class="card">
     <h2>📸 Más fotos</h2>
     <div class="gallery">
-      {#each photos as photo}
-        <img
-          src={photo.src}
-          alt={photo.alt}
-          onclick={() => openLightbox(photo.src)}
-        />
+      {#each photos as photo (photo.src)}
+        <button type="button" class="gallery-btn" onclick={() => openLightbox(photo.src)} aria-label="Ver {photo.alt}">
+          <img src={photo.src} alt={photo.alt} />
+        </button>
       {/each}
     </div>
   </section>
@@ -168,7 +189,7 @@
       Si lo ves, <strong>no lo persigas</strong>. Llámanos de inmediato.
     </p>
     <div class="contact-buttons">
-      {#each contacts as c}
+      {#each contacts as c (c.href)}
         <a href={c.href} class="btn" style="background: {c.color}">
           <span class="btn-icon">{c.icon}</span>
           <span class="btn-text">{c.label}<br /><span class="btn-detail">{c.detail}</span></span>
@@ -197,31 +218,26 @@
 
 <!-- LIGHTBOX -->
 {#if lightboxSrc}
-  <div class="lightbox open" onclick={closeLightbox} role="button" tabindex="0" aria-label="Cerrar imagen">
+  <!-- svelte-ignore a11y_click_events_have_key_events -->
+  <div
+    class="lightbox"
+    onclick={closeLightbox}
+    role="button"
+    tabindex="0"
+    aria-label="Cerrar imagen"
+    onkeydown={(/** @type {KeyboardEvent} */ e) => e.key === 'Escape' && closeLightbox()}
+  >
     <img src={lightboxSrc} alt="Foto de Garbanzo" />
   </div>
 {/if}
 
 <style>
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-
   :root {
     --alert: #e63946;
     --alert-dark: #c1121f;
     --bg: #fafafa;
     --text: #1a1a1a;
     --muted: #666;
-  }
-
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
   }
 
   .banner {
@@ -407,16 +423,23 @@
     margin-top: 8px;
   }
 
-  .gallery img {
-    width: 100%;
-    border-radius: 10px;
+  .gallery-btn {
+    border: none;
+    padding: 0;
     cursor: pointer;
+    background: none;
+    border-radius: 10px;
+    overflow: hidden;
     transition: transform 0.2s;
-    display: block;
   }
 
-  .gallery img:active {
+  .gallery-btn:active {
     transform: scale(0.97);
+  }
+
+  .gallery-btn img {
+    width: 100%;
+    display: block;
   }
 
   .contact-note {
