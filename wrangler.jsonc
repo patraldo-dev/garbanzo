@@ -1,0 +1,8 @@
+{
+  "name": "garbanzo",
+  "compatibility_date": "2025-07-01",
+  "assets": {
+    "directory": "./build/client",
+    "binding": "ASSETS"
+  }
+}

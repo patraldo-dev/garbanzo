@@ -1,0 +1,515 @@
+<script>
+  let { data } = $props();
+
+  let lightboxSrc = $state(null);
+
+  const photos = [
+    { src: '/photos/garbanzo-1.jpg', alt: 'Garbanzo durmiendo en el sofá', primary: true },
+    { src: '/photos/garbanzo-2.jpg', alt: 'Garbanzo en el jardín' },
+    { src: '/photos/garbanzo-3.jpg', alt: 'Garbanzo olfateando el pasto' },
+    { src: '/photos/garbanzo-4.jpg', alt: 'Garbanzo caminando' },
+  ];
+
+  const contacts = [
+    {
+      label: 'WhatsApp: Cris',
+      detail: '+1 860 354 1401',
+      href: 'https://wa.me/18603541401',
+      icon: '💬',
+      color: '#25d366',
+    },
+    {
+      label: 'WhatsApp: Antonio',
+      detail: '33 3355 5670',
+      href: 'https://wa.me/523333555670',
+      icon: '💬',
+      color: '#128c7e',
+    },
+    {
+      label: 'Llamada: Antonio',
+      detail: '33 3355 5670',
+      href: 'tel:+523333555670',
+      icon: '📞',
+      color: '#34b7f1',
+    },
+    {
+      label: 'Email',
+      detail: 'garbanzo@patraldo.com',
+      href: 'mailto:garbanzo@patraldo.com',
+      icon: '✉️',
+      color: '#6c63ff',
+    },
+  ];
+
+  function openLightbox(src) {
+    lightboxSrc = src;
+  }
+
+  function closeLightbox() {
+    lightboxSrc = null;
+  }
+
+  function sharePage() {
+    if (navigator.share) {
+      navigator.share({
+        title: '⚠️ SE BUSCA: Garbanzo - Gato Perdido en Santa Tere',
+        text: 'Ayúdennos a encontrar a Garbanzo. Perdido en Pedro Buzeta #277, Santa Tere. Recompensa.',
+        url: window.location.href,
+      });
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert('¡Link copiado! Compártelo por WhatsApp o redes.');
+    }
+  }
+
+  function handleKeydown(e) {
+    if (e.key === 'Escape') closeLightbox();
+  }
+</script>
+
+<svelte:head>
+  <title>⚠️ SE BUSCA: Garbanzo — Gato Perdido en Santa Tere</title>
+  <meta name="description" content="Garbanzo se perdió la noche del 3 de julio de 2026 en Santa Tere, Guadalajara. Blanco con gris, collar Rogz amarillo. SE OFRECE RECOMPENSA." />
+  <meta property="og:title" content="⚠️ SE BUSCA: Garbanzo — Gato Perdido" />
+  <meta property="og:description" content="Perdido desde el 3 de julio en Pedro Buzeta #277, Santa Tere. Blanco con gris, collar Rogz amarillo. Recompensa." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/photos/garbanzo-1.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="⚠️ SE BUSCA: Garbanzo — Gato Perdido" />
+  <meta name="twitter:description" content="Perdido desde el 3 de julio en Santa Tere, GDL. Recompensa." />
+  <meta name="twitter:image" content="/photos/garbanzo-1.jpg" />
+</svelte:head>
+
+<svelte:window on:keydown={handleKeydown} />
+
+<div class="banner">
+  <span class="dot"></span>
+  GATO PERDIDO DESDE EL 3 DE JULIO · SANTA TERE, GDL
+  <span class="dot"></span>
+</div>
+
+<div class="container">
+  <!-- HERO -->
+  <section class="hero">
+    <div class="lost-badge">🚨 Se Busca · Recompensa 🚨</div>
+    <h1>GARBANZO</h1>
+    <p class="subtitle">Gatito perdido en Santa Tere, Guadalajara</p>
+    <img src={photos[0].src} alt={photos[0].alt} class="hero-img" />
+  </section>
+
+  <!-- REWARD -->
+  <div class="reward">
+    💰 SE OFRECE RECOMPENSA 💰
+    <p class="reward-note">No se pide depósito previo — se entrega al tenerlo con nosotros</p>
+  </div>
+
+  <!-- DESCRIPTION -->
+  <section class="card">
+    <h2>🐱 Descripción</h2>
+    <div class="detail-grid">
+      <div class="detail">
+        <div class="label">Color</div>
+        <div class="value">Blanco con gris</div>
+      </div>
+      <div class="detail">
+        <div class="label">Collar</div>
+        <div class="value">Rogz amarillo-crema</div>
+      </div>
+      <div class="detail">
+        <div class="label">Nombre</div>
+        <div class="value">Garbanzo</div>
+      </div>
+      <div class="detail">
+        <div class="label">Perdido desde</div>
+        <div class="value">3 de julio 2026</div>
+      </div>
+    </div>
+    <p class="description">
+      Gatito <strong>blanco con gris</strong>, lleva collar <strong>Rogz color amarillo-crema</strong>. Ya tiene dos días fuera de casa.
+      Probablemente esté asustado y escondido en algún rincón cercano buscando resguardo.
+    </p>
+  </section>
+
+  <!-- LOCATION -->
+  <section class="card">
+    <h2>📍 Zona de Extravío</h2>
+    <p class="address">
+      Calle Pedro Buzeta #277<br />
+      <span class="muted">Entre Garibaldi y Reforma · Cerca de Av. México</span><br />
+      <span class="normal">Santa Tere, Guadalajara, Jalisco</span>
+    </p>
+    <div class="map-wrap">
+      <iframe
+        src="https://www.openstreetmap.org/export/embed.html?bbox=-103.3685%2C20.6865%2C-103.3585%2C20.6925&layer=mapnik&marker=20.6895%2C-103.3635"
+        loading="lazy"
+        title="Mapa de la zona donde se perdió Garbanzo"
+      ></iframe>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="card">
+    <h2>📸 Más fotos</h2>
+    <div class="gallery">
+      {#each photos as photo}
+        <img
+          src={photo.src}
+          alt={photo.alt}
+          onclick={() => openLightbox(photo.src)}
+        />
+      {/each}
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="card">
+    <h2>📞 Contacto</h2>
+    <p class="contact-note">
+      Si lo ves, <strong>no lo persigas</strong>. Llámanos de inmediato.
+    </p>
+    <div class="contact-buttons">
+      {#each contacts as c}
+        <a href={c.href} class="btn" style="background: {c.color}">
+          <span class="btn-icon">{c.icon}</span>
+          <span class="btn-text">{c.label}<br /><span class="btn-detail">{c.detail}</span></span>
+        </a>
+      {/each}
+    </div>
+  </section>
+
+  <!-- HELP -->
+  <section class="card help-card">
+    <h2>🙏 Ayúdanos</h2>
+    <p class="help-text">
+      Si vives por la zona, te pedimos revises tu <strong>cochera, jardín, azotea</strong> o debajo de tus carros.
+      Garbanzo lleva días asustado y probablemente busca resguardo del sol y la lluvia cerca de casa.
+    </p>
+    <button class="btn btn-share" onclick={sharePage}>
+      📤 Compartir esta página
+    </button>
+  </section>
+
+  <footer class="footer">
+    <p>Gracias por ayudar a encontrar a Garbanzo 🐾</p>
+    <p class="domain">garbanzo.patraldo.com</p>
+  </footer>
+</div>
+
+<!-- LIGHTBOX -->
+{#if lightboxSrc}
+  <div class="lightbox open" onclick={closeLightbox} role="button" tabindex="0" aria-label="Cerrar imagen">
+    <img src={lightboxSrc} alt="Foto de Garbanzo" />
+  </div>
+{/if}
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  :root {
+    --alert: #e63946;
+    --alert-dark: #c1121f;
+    --bg: #fafafa;
+    --text: #1a1a1a;
+    --muted: #666;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  .banner {
+    background: var(--alert);
+    color: white;
+    text-align: center;
+    padding: 12px 16px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    animation: pulse 1s infinite;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.3;
+    }
+  }
+
+  .container {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 16px 60px;
+  }
+
+  .hero {
+    text-align: center;
+    padding: 24px 0 16px;
+  }
+
+  .hero h1 {
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: var(--alert-dark);
+    line-height: 1.15;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 1.05rem;
+    margin-bottom: 20px;
+  }
+
+  .hero-img {
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.12);
+    display: block;
+  }
+
+  .lost-badge {
+    display: inline-block;
+    background: var(--alert);
+    color: white;
+    padding: 6px 18px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .reward {
+    text-align: center;
+    background: linear-gradient(135deg, #ffd60a, #ffc300);
+    color: #1a1a1a;
+    padding: 16px;
+    border-radius: 14px;
+    font-weight: 800;
+    font-size: 1.15rem;
+    margin: 16px 0;
+    box-shadow: 0 3px 14px rgba(255, 195, 0, 0.4);
+  }
+
+  .reward-note {
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  .card {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    margin: 16px 0;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  .card h2 {
+    font-size: 1.2rem;
+    margin-bottom: 12px;
+  }
+
+  .detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .detail {
+    background: #f5f5f5;
+    padding: 12px;
+    border-radius: 10px;
+  }
+
+  .detail .label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .detail .value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  .description {
+    font-size: 1.02rem;
+    color: #333;
+    margin-top: 14px;
+  }
+
+  .description strong {
+    color: var(--alert-dark);
+  }
+
+  .address {
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+
+  .muted {
+    font-weight: 400;
+    color: var(--muted);
+  }
+
+  .normal {
+    font-weight: 400;
+  }
+
+  .map-wrap {
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 8px;
+  }
+
+  .map-wrap iframe {
+    width: 100%;
+    height: 250px;
+    border: 0;
+    display: block;
+  }
+
+  .gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 8px;
+  }
+
+  .gallery img {
+    width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    display: block;
+  }
+
+  .gallery img:active {
+    transform: scale(0.97);
+  }
+
+  .contact-note {
+    margin-bottom: 4px;
+    color: var(--muted);
+  }
+
+  .contact-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 12px;
+  }
+
+  .btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    color: white;
+    transition: transform 0.15s, box-shadow 0.15s;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+  }
+
+  .btn:active {
+    transform: scale(0.97);
+  }
+
+  .btn-share {
+    background: var(--alert-dark);
+    margin-top: 12px;
+  }
+
+  .btn-icon {
+    font-size: 1.3rem;
+  }
+
+  .btn-detail {
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .help-card {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+  }
+
+  .help-text {
+    font-size: 0.98rem;
+  }
+
+  .lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.92);
+    z-index: 200;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out;
+  }
+
+  .lightbox img {
+    max-width: 95%;
+    max-height: 90vh;
+    border-radius: 8px;
+  }
+
+  .footer {
+    text-align: center;
+    padding: 24px 0;
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  .domain {
+    margin-top: 4px;
+  }
+
+  @media (min-width: 600px) {
+    .hero h1 {
+      font-size: 2.8rem;
+    }
+  }
+</style>
