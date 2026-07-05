@@ -17,7 +17,10 @@
 
   /** @type {Photo[]} */
   const photos = [
-    { src: '/photos/garbanzo-1.jpg', alt: 'Garbanzo durmiendo en el sofá', primary: true },
+    { src: '/photos/garbanzo-0.jpg', alt: 'Garbanzo adorable de cerca dormido, primary: true },
+    { src: '/photos/garbanzo-5.jpg', alt: 'Garbanzo en con mamachita sofá' },
+    { src: '/photos/garbanzo-6.jpg', alt: 'Garbanzo dormiendo hacia la camara en el sofá' },
+    { src: '/photos/garbanzo-1.jpg', alt: 'Garbanzo durmiendo en el sofá' },
     { src: '/photos/garbanzo-2.jpg', alt: 'Garbanzo en el jardín' },
     { src: '/photos/garbanzo-3.jpg', alt: 'Garbanzo olfateando el pasto' },
     { src: '/photos/garbanzo-4.jpg', alt: 'Garbanzo caminando' },
