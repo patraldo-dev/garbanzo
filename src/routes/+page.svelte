@@ -1,7 +1,7 @@
 <script>
   /**
    * @typedef {Object} Photo
-   * @property {string} src
+   * @property {string} id - Cloudflare Images ID
    * @property {string} alt
    * @property {boolean} [primary]
    */
@@ -15,15 +15,27 @@
    * @property {string} color
    */
 
+  const CF_HASH = '4bRSwPonOXfEIBVZiDXg0w';
+
+  /**
+   * Build a Cloudflare Images URL.
+   * @param {string} id
+   * @param {string} variant
+   * @returns {string}
+   */
+  function img(id, variant) {
+    return `https://imagedelivery.net/${CF_HASH}/${id}/${variant}`;
+  }
+
   /** @type {Photo[]} */
   const photos = [
-    { src: '/photos/garbanzo-0.jpg', alt: 'Garbanzo adorable de cerca dormido', primary: true },
-    { src: '/photos/garbanzo-5.jpg', alt: 'Garbanzo en con mamachita sofá' },
-    { src: '/photos/garbanzo-6.jpg', alt: 'Garbanzo dormiendo hacia la camara en el sofá' },
-    { src: '/photos/garbanzo-1.jpg', alt: 'Garbanzo durmiendo en el sofá' },
-    { src: '/photos/garbanzo-2.jpg', alt: 'Garbanzo en el jardín' },
-    { src: '/photos/garbanzo-3.jpg', alt: 'Garbanzo olfateando el pasto' },
-    { src: '/photos/garbanzo-4.jpg', alt: 'Garbanzo caminando' },
+    { id: '6094109c-4045-4f7a-b1ce-21769d89ee00', alt: 'Garbanzo adorable de cerca dormido', primary: true },
+    { id: '581c7919-2931-4422-c367-34dc24641100', alt: 'Garbanzo en con mamachita sofá' },
+    { id: 'a49d77ec-9253-4503-c4aa-e904ad149c00', alt: 'Garbanzo dormiendo hacia la cámara en el sofá' },
+    { id: 'd896cb53-03e1-4f9b-4686-b42f8d045000', alt: 'Garbanzo durmiendo en el sofá' },
+    { id: 'dc6bdc22-529e-412e-e9c5-cc5580282700', alt: 'Garbanzo en el jardín' },
+    { id: '225137e0-9cc6-4f6e-8527-d8af2523ee00', alt: 'Garbanzo olfateando el pasto' },
+    { id: '055e9b2d-a1ee-430b-f206-321f15869400', alt: 'Garbanzo caminando' },
   ];
 
   /** @type {Contact[]} */
@@ -99,11 +111,11 @@
   <meta property="og:title" content="⚠️ SE BUSCA: Garbanzo — Gato Perdido" />
   <meta property="og:description" content="Perdido desde el 3 de julio en Pedro Buzeta #277, Santa Tere. Blanco con gris, collar Rogz amarillo. Recompensa." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="/photos/garbanzo-0.jpg" />
+  <meta property="og:image" content={img(photos[0].id, 'cover')} />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="⚠️ SE BUSCA: Garbanzo — Gato Perdido" />
   <meta name="twitter:description" content="Perdido desde el 3 de julio en Santa Tere, GDL. Recompensa." />
-  <meta name="twitter:image" content="/photos/garbanzo-0.jpg" />
+  <meta name="twitter:image" content={img(photos[0].id, 'cover')} />
 </svelte:head>
 
 <svelte:window on:keydown={handleKeydown} />
@@ -120,7 +132,7 @@
     <div class="lost-badge">🚨 Se Busca · Recompensa 🚨</div>
     <h1>GARBANZO</h1>
     <p class="subtitle">Gatito perdido en Santa Tere, Guadalajara</p>
-    <img src={photos[0].src} alt={photos[0].alt} class="hero-img" />
+    <img src={img(photos[0].id, 'cover')} alt={photos[0].alt} class="hero-img" />
   </section>
 
   <!-- REWARD -->
@@ -177,9 +189,9 @@
   <section class="card">
     <h2>📸 Más fotos</h2>
     <div class="gallery">
-      {#each photos as photo (photo.src)}
-        <button type="button" class="gallery-btn" onclick={() => openLightbox(photo.src)} aria-label="Ver {photo.alt}">
-          <img src={photo.src} alt={photo.alt} />
+      {#each photos as photo (photo.id)}
+        <button type="button" class="gallery-btn" onclick={() => openLightbox(img(photo.id, 'full'))} aria-label="Ver {photo.alt}">
+          <img src={img(photo.id, 'gallery')} alt={photo.alt} loading="lazy" />
         </button>
       {/each}
     </div>
