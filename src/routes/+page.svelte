@@ -178,7 +178,7 @@
     </p>
     <div class="map-wrap">
       <iframe
-        src="https://www.openstreetmap.org/export/embed.html?bbox=-103.3685%2C20.6865%2C-103.3585%2C20.6925&layer=mapnik&marker=20.6895%2C-103.3635"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=-103.3720%2C20.6785%2C-103.3670%2C20.6835&layer=mapnik&marker=20.6808609%2C-103.3695940"
         loading="lazy"
         title="Mapa de la zona donde se perdió Garbanzo"
       ></iframe>
