@@ -1,0 +1,174 @@
+const POSTER_HTML = `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SE BUSCA - Garbanzo</title>
+<style>
+  @page { size: 11in 8.5in; margin: 0.5in; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 10in;
+    height: 7.5in;
+    font-family: 'Arial', 'Helvetica', sans-serif;
+    background: #fff;
+    overflow: hidden;
+  }
+  body { display: flex; flex-direction: column; }
+
+  .header {
+    text-align: center;
+    background: #d32f2f;
+    color: #fff;
+    padding: 8px 0;
+    border-radius: 6px;
+    margin-bottom: 8px;
+  }
+  .header h1 { font-size: 2.2rem; font-weight: 900; letter-spacing: 3px; }
+  .header p { font-size: 1rem; font-weight: 600; }
+
+  .main {
+    display: flex;
+    gap: 12px;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .photos {
+    flex: 0 0 5in;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .photos .main-img {
+    width: 100%;
+    flex: 1;
+    min-height: 0;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 3px solid #333;
+  }
+  .bottom-row { display: flex; gap: 5px; height: 1.6in; }
+  .bottom-row img {
+    width: calc(50% - 3px);
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 2px solid #333;
+  }
+
+  .info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .cat-name { font-size: 2rem; font-weight: 900; text-align: center; color: #333; }
+
+  .description {
+    background: #fff3e0;
+    border: 2px solid #ff9800;
+    border-radius: 6px;
+    padding: 10px 12px;
+  }
+  .description h2 { font-size: 1rem; color: #e65100; margin-bottom: 4px; }
+  .description ul { list-style: none; font-size: 0.92rem; line-height: 1.5; color: #333; }
+  .description li::before { content: "•"; color: #e65100; font-weight: bold; margin-right: 5px; }
+
+  .reward {
+    background: #e8f5e9;
+    border: 2px solid #2e7d32;
+    border-radius: 6px;
+    padding: 8px;
+    text-align: center;
+  }
+  .reward h2 { font-size: 1.5rem; color: #1b5e20; font-weight: 900; }
+
+  .contact-box {
+    background: #333;
+    color: #fff;
+    border-radius: 6px;
+    padding: 10px;
+    text-align: center;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .contact-box h2 { font-size: 1rem; margin-bottom: 5px; }
+  .contact-box .phone-main { font-size: 1.4rem; font-weight: 900; }
+  .contact-box .wa { font-size: 0.95rem; font-weight: 600; margin-top: 4px; }
+  .contact-box .web { font-size: 0.95rem; margin-top: 4px; }
+  .contact-box .web a { color: #90caf9; text-decoration: none; }
+  .contact-box .addr { font-size: 0.88rem; color: #ccc; margin-top: 4px; }
+  .contact-box .note {
+    font-size: 0.78rem;
+    color: #999;
+    margin-top: 8px;
+    line-height: 1.3;
+  }
+  .contact-box .note strong { color: #fff; }
+
+  @media print {
+    html, body { width: 10in; height: 7.5in; overflow: hidden; }
+    .header { border-radius: 0; }
+  }
+</style>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg"></head>
+<body>
+
+<div class="header">
+  <h1>¡SE BUSCA!</h1>
+  <p>Gato perdido · Por favor ayúdanos a encontrarlo</p>
+  <p style="font-weight: 700; font-size: 1.1rem; margin-top: 0.3rem;">Seguimos buscando hoy sábado 11 de julio</p>
+</div>
+
+<div class="main">
+  <div class="photos">
+    <img class="main-img" src="https://imagedelivery.net/4bRSwPonOXfEIBVZiDXg0w/6094109c-4045-4f7a-b1ce-21769d89ee00/full" alt="Garbanzo">
+    <div class="bottom-row">
+      <img src="https://imagedelivery.net/4bRSwPonOXfEIBVZiDXg0w/dc6bdc22-529e-412e-e9c5-cc5580282700/full" alt="Garbanzo jardín">
+      <img src="https://imagedelivery.net/4bRSwPonOXfEIBVZiDXg0w/225137e0-9cc6-4f6e-8527-d8af2523ee00/full" alt="Garbanzo collar">
+    </div>
+  </div>
+
+  <div class="info">
+    <div class="cat-name">GARBANZO</div>
+
+    <div class="description">
+      <h2>DESCRIPCIÓN</h2>
+      <ul>
+        <li>Blanco con gris</li>
+        <li>Collar Rogz amarillo</li>
+        <li>Muy cariñoso y sociable</li>
+        <li>Se perdió el 3 de julio en Santa Tere</li>
+      </ul>
+    </div>
+
+    <div class="reward">
+      <h2>RECOMPENSA</h2>
+    </div>
+
+    <div class="contact-box">
+      <h2>SI LO VES, LLAMA O ESCRIBE</h2>
+      <p class="phone-main">Antonio: 33 3355 5670</p>
+      <p class="wa">WhatsApp Cris: +1 860 354 1401</p>
+      <p class="web"><a href="https://garbanzo.patraldo.com">garbanzo.patraldo.com</a></p>
+      <p class="addr">Pedro Antonio Buzeta 277, Santa Tere</p>
+      <p class="note">Por favor no lo persigas ni intentes atraparlo. Si lo ves, tómale una foto y mándala al número. <strong>¡Gracias!</strong></p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>`;
+
+export function GET() {
+  return new Response(POSTER_HTML, {
+    headers: {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'public, max-age=0, must-revalidate'
+    }
+  });
+}
