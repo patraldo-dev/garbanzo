@@ -9,5 +9,21 @@
   },
   "observability": {
     "enabled": true
-  }
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "garbanzo-sightings",
+      "database_id": "402bf7b4-edbc-4d44-827c-13abafac92e3"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "RATE_LIMIT",
+      "id": "3e6d4321829a4d8786f8a801ecdf2a11"
+    }
+  ]
 }

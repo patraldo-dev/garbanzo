@@ -3,7 +3,7 @@ const POSTER_HTML = `<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SE BUSCA - Garbanzo</title>
+<title>SE BUSCA - Garbanzo (B/N)</title>
 <style>
   @page { size: 11in 8.5in; margin: 0.5in; }
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -18,18 +18,17 @@ const POSTER_HTML = `<!DOCTYPE html>
 
   .header {
     text-align: center;
-    background: #d32f2f;
-    color: #fff;
-    padding: 8px 0;
-    border-radius: 6px;
+    border: 5px solid #000;
+    color: #000;
+    padding: 10px 0;
     margin-bottom: 8px;
   }
-  .header h1 { font-size: 2.2rem; font-weight: 900; letter-spacing: 3px; }
-  .header p { font-size: 1rem; font-weight: 600; }
+  .header h1 { font-size: 3rem; font-weight: 900; letter-spacing: 4px; }
+  .header p { font-size: 1.2rem; font-weight: 900; }
 
   .main {
     display: flex;
-    gap: 12px;
+    gap: 14px;
     flex: 1;
     min-height: 0;
   }
@@ -45,74 +44,63 @@ const POSTER_HTML = `<!DOCTYPE html>
     flex: 1;
     min-height: 0;
     object-fit: cover;
-    border-radius: 6px;
-    border: 3px solid #333;
+    border: 4px solid #000;
+    filter: grayscale(1) contrast(1.3);
   }
-  .bottom-row { display: flex; gap: 5px; height: 1.6in; }
+  .bottom-row { display: flex; gap: 5px; height: 1.5in; }
   .bottom-row img {
     width: calc(50% - 3px);
     height: 100%;
     object-fit: cover;
-    border-radius: 4px;
-    border: 2px solid #333;
+    border: 3px solid #000;
+    filter: grayscale(1) contrast(1.3);
   }
 
   .info {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
   }
 
-  .cat-name { font-size: 2rem; font-weight: 900; text-align: center; color: #333; }
+  .cat-name {
+    font-size: 2.5rem;
+    font-weight: 900;
+    text-align: center;
+    color: #000;
+    border-bottom: 4px solid #000;
+    padding-bottom: 4px;
+  }
 
   .description {
-    background: #fff3e0;
-    border: 2px solid #ff9800;
-    border-radius: 6px;
-    padding: 10px 12px;
+    padding: 6px 0;
   }
-  .description h2 { font-size: 1rem; color: #e65100; margin-bottom: 4px; }
-  .description ul { list-style: none; font-size: 0.92rem; line-height: 1.5; color: #333; }
-  .description li::before { content: "•"; color: #e65100; font-weight: bold; margin-right: 5px; }
+  .description h2 { font-size: 1.3rem; margin-bottom: 4px; font-weight: 900; }
+  .description ul { list-style: none; font-size: 1.1rem; line-height: 1.5; font-weight: 900; }
+  .description li::before { content: "■"; margin-right: 6px; }
 
   .reward {
-    background: #e8f5e9;
-    border: 2px solid #2e7d32;
-    border-radius: 6px;
-    padding: 8px;
+    padding: 6px 0;
     text-align: center;
+    border-bottom: 4px solid #000;
+    border-top: 4px solid #000;
   }
-  .reward h2 { font-size: 1.5rem; color: #1b5e20; font-weight: 900; }
+  .reward h2 { font-size: 2rem; font-weight: 900; }
 
-  .contact-box {
-    background: #333;
-    color: #fff;
-    border-radius: 6px;
-    padding: 10px;
+  .contact {
     text-align: center;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    color: #000;
+    font-weight: 900;
   }
-  .contact-box h2 { font-size: 1rem; margin-bottom: 5px; }
-  .contact-box .phone-main { font-size: 1.4rem; font-weight: 900; }
-  .contact-box .wa { font-size: 0.95rem; font-weight: 600; margin-top: 4px; }
-  .contact-box .web { font-size: 0.95rem; margin-top: 4px; }
-  .contact-box .web a { color: #90caf9; text-decoration: none; }
-  .contact-box .addr { font-size: 0.88rem; color: #ccc; margin-top: 4px; }
-  .contact-box .note {
-    font-size: 0.78rem;
-    color: #999;
-    margin-top: 8px;
-    line-height: 1.3;
-  }
-  .contact-box .note strong { color: #fff; }
+  .contact .label { font-size: 1.2rem; font-weight: 900; margin-bottom: 4px; }
+  .contact .phone { font-size: 2.2rem; font-weight: 900; }
+  .contact .wa { font-size: 1.4rem; font-weight: 900; margin-top: 4px; }
+  .contact .web { font-size: 1.4rem; font-weight: 900; margin-top: 4px; }
+  .contact .addr { font-size: 1.2rem; font-weight: 900; margin-top: 4px; }
+  .contact .note { font-size: 1rem; font-weight: 700; margin-top: 8px; line-height: 1.3; }
 
   @media print {
     html, body { width: 10in; height: 7.5in; overflow: hidden; }
-    .header { border-radius: 0; }
   }
 </style>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg"></head>
@@ -150,13 +138,13 @@ const POSTER_HTML = `<!DOCTYPE html>
       <h2>RECOMPENSA</h2>
     </div>
 
-    <div class="contact-box">
-      <h2>SI LO VES, LLAMA O ESCRIBE</h2>
-      <p class="phone-main">Antonio: 33 3355 5670</p>
-      <p class="wa">WhatsApp Cris: +1 860 354 1401</p>
-      <p class="web"><a href="https://garbanzo.patraldo.com">garbanzo.patraldo.com</a></p>
-      <p class="addr">Pedro Antonio Buzeta 277, Santa Tere</p>
-      <p class="note">Por favor no lo persigas ni intentes atraparlo. Si lo ves, tómale una foto y mándala al número. <strong>¡Gracias!</strong></p>
+    <div class="contact">
+      <div class="label">SI LO VES, LLAMA O ESCRIBE</div>
+      <div class="phone">Antonio: 33 3355 5670</div>
+      <div class="wa">WhatsApp Cris: +1 860 354 1401</div>
+      <div class="web">garbanzo.patraldo.com</div>
+      <div class="addr">Pedro Antonio Buzeta 277, Santa Tere</div>
+      <div class="note">No lo persigas. Tómale una foto y mándala al número. ¡GRACIAS!</div>
     </div>
   </div>
 </div>
