@@ -1,6 +1,6 @@
 /**
  * Cloudflare Images upload helpers.
- * Requires CF_API_TOKEN secret in the Worker environment.
+ * Uses CLOUDFLARE_API_TOKEN from Secrets Store.
  */
 
 import { IMAGES_API } from './config.js';
@@ -13,9 +13,9 @@ import { IMAGES_API } from './config.js';
  * @returns {Promise<{ success: boolean, id?: string, url?: string, error?: string }>}
  */
 export async function uploadToCloudflareImages(imageData, filename, ctx) {
-  const token = ctx.env.CF_API_TOKEN;
+  const token = ctx.env.CLOUDFLARE_API_TOKEN;
   if (!token) {
-    return { success: false, error: 'Server not configured: CF_API_TOKEN missing' };
+    return { success: false, error: 'Server not configured: CLOUDFLARE_API_TOKEN missing' };
   }
 
   const formData = new FormData();
@@ -53,7 +53,7 @@ export async function uploadToCloudflareImages(imageData, filename, ctx) {
  * @returns {Promise<boolean>}
  */
 export async function deleteFromCloudflareImages(imageId, ctx) {
-  const token = ctx.env.CF_API_TOKEN;
+  const token = ctx.env.CLOUDFLARE_API_TOKEN;
   if (!token) return false;
 
   try {
