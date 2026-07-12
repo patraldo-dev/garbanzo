@@ -1,6 +1,6 @@
 /**
  * Cloudflare Images upload helpers.
- * Uses CLOUDFLARE_API_TOKEN from Secrets Store.
+ * Uses GARBANZO_IMAGES_TOKEN from Secrets Store.
  */
 
 import { IMAGES_API } from './config.js';
@@ -16,13 +16,13 @@ export async function uploadToCloudflareImages(imageData, filename, ctx) {
   /** @type {string | null} */
   let token;
   try {
-    const raw = ctx.env.CLOUDFLARE_API_TOKEN;
+    const raw = ctx.env.GARBANZO_IMAGES_TOKEN;
     token = typeof raw === 'string' ? raw : (await raw?.get?.()) ?? null;
   } catch {
     token = null;
   }
   if (!token) {
-    return { success: false, error: 'Server not configured: CLOUDFLARE_API_TOKEN missing' };
+    return { success: false, error: 'Server not configured: GARBANZO_IMAGES_TOKEN missing' };
   }
 
   const formData = new FormData();
@@ -63,7 +63,7 @@ export async function deleteFromCloudflareImages(imageId, ctx) {
   /** @type {string | null} */
   let token;
   try {
-    const raw = ctx.env.CLOUDFLARE_API_TOKEN;
+    const raw = ctx.env.GARBANZO_IMAGES_TOKEN;
     token = typeof raw === 'string' ? raw : (await raw?.get?.()) ?? null;
   } catch {
     token = null;
