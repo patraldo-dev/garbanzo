@@ -15,7 +15,7 @@
   },
   "vars": {
     "ADMIN_EMAIL": "garbanzo@patraldo.com",
-    "MAILGUN_FROM": "Garbanzo <noreply@garbanzo.patraldo.com>",
+    "MAILGUN_FROM": "Garbanzo <noreply@patraldo.com>",
     "MAILGUN_DOMAIN": "patraldo.com"
   },
   "d1_databases": [
