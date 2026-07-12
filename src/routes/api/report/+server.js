@@ -16,6 +16,8 @@ import { uploadToCloudflareImages } from '$lib/server/images.js';
 import { validateCatImage, scanForExtortion } from '$lib/server/ai-filter.js';
 import { checkRateLimit, incrementRateLimit } from '$lib/server/ratelimit.js';
 import { generateId, hashIp, imgUrl } from '$lib/server/config.js';
+import { notifyNewSighting } from '$lib/server/notify.js';
+
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif'];

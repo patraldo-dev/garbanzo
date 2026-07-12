@@ -13,6 +13,10 @@
   "ai": {
     "binding": "AI"
   },
+  "vars": {
+    "ADMIN_EMAIL": "garbanzo@patraldo.com",
+    "MAILGUN_FROM": "Garbanzo <noreply@garbanzo.patraldo.com>"
+  },
   "d1_databases": [
     {
       "binding": "DB",
