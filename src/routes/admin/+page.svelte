@@ -4,8 +4,9 @@
    * Protected by ADMIN_TOKEN (passed via URL ?token=xxx).
    */
 
-  /** @type {{ authorized: boolean, sightings: any[], dbError?: boolean, error?: string }} */
-  let { authorized, sightings, dbError, error } = $props();
+  /** @type {{ data: { authorized: boolean, sightings: any[], dbError?: boolean, error?: string } }} */
+  let { data } = $props();
+  let { authorized, sightings, dbError, error } = data;
 
   let filter = $state('all'); // all | pending | reviewed | rejected | flagged
   let selected = $state(null);

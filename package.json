@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite dev",
-    "build": "vite build",
+    "build": "vite build && echo '_worker.js' > .svelte-kit/cloudflare/.assetsignore",
     "preview": "vite preview"
   },
   "devDependencies": {

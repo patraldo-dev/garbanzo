@@ -7,15 +7,24 @@ import { imgUrl } from '$lib/server/config.js';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ url, platform }) {
-  // Auth check
   const token = url.searchParams.get('token') || '';
-  const adminToken = platform?.env?.ADMIN_TOKEN || '';
+  const env = platform?.env || {};
+  const adminToken = env.ADMIN_TOKEN || '';
+
+  // Debug: remove after testing
+  console.log('Admin auth check:', {
+    hasPlatform: !!platform,
+    hasEnv: !!platform?.env,
+    tokenProvided: token.slice(0, 8) + '...',
+    hasAdminToken: !!adminToken,
+    match: token === adminToken,
+  });
 
   if (!adminToken || token !== adminToken) {
     return { authorized: false, sightings: [] };
   }
 
-  const db = platform?.env?.DB;
+  const db = env.DB;
   if (!db) {
     return { authorized: true, sightings: [], dbError: true };
   }
