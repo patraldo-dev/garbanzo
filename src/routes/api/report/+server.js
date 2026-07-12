@@ -134,6 +134,24 @@ export async function POST({ request, platform, getClientAddress }) {
         aiResult.verdict, aiResult.description, aiResult.confidence,
         ipHash, status
       ).run();
+
+      // --- 10b. Notify admin via Mailgun (non-blocking for the user) ---
+      try {
+        await notifyNewSighting(env, {
+          id,
+          imageUrl,
+          aiVerdict: aiResult.verdict,
+          aiDescription: aiResult.description,
+          location,
+          notes,
+          reporterName,
+          reporterContact,
+          status
+        });
+      } catch (notifyErr) {
+        console.error('notifyNewSighting error:', notifyErr);
+        // Do not throw — user flow should still succeed even if email fails
+      }
     } catch (dbErr) {
       console.error('D1 insert error:', dbErr);
     }
