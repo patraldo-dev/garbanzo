@@ -13,7 +13,14 @@ import { IMAGES_API } from './config.js';
  * @returns {Promise<{ success: boolean, id?: string, url?: string, error?: string }>}
  */
 export async function uploadToCloudflareImages(imageData, filename, ctx) {
-  const token = ctx.env.CLOUDFLARE_API_TOKEN;
+  /** @type {string | null} */
+  let token;
+  try {
+    const raw = ctx.env.CLOUDFLARE_API_TOKEN;
+    token = typeof raw === 'string' ? raw : (await raw?.get?.()) ?? null;
+  } catch {
+    token = null;
+  }
   if (!token) {
     return { success: false, error: 'Server not configured: CLOUDFLARE_API_TOKEN missing' };
   }
@@ -53,7 +60,14 @@ export async function uploadToCloudflareImages(imageData, filename, ctx) {
  * @returns {Promise<boolean>}
  */
 export async function deleteFromCloudflareImages(imageId, ctx) {
-  const token = ctx.env.CLOUDFLARE_API_TOKEN;
+  /** @type {string | null} */
+  let token;
+  try {
+    const raw = ctx.env.CLOUDFLARE_API_TOKEN;
+    token = typeof raw === 'string' ? raw : (await raw?.get?.()) ?? null;
+  } catch {
+    token = null;
+  }
   if (!token) return false;
 
   try {
