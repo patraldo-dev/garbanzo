@@ -25,9 +25,8 @@ export async function uploadToCloudflareImages(imageData, filename, ctx) {
     return { success: false, error: 'Server not configured: GARBANZO_IMAGES_TOKEN missing' };
   }
 
-  const formData = new FormData();
+const formData = new FormData();
   formData.append('file', new Blob([imageData]), filename);
-
   try {
     const resp = await fetch(`${IMAGES_API}`, {
       method: 'POST',
@@ -36,13 +35,17 @@ export async function uploadToCloudflareImages(imageData, filename, ctx) {
       },
       body: formData,
     });
-
+    if (!resp.ok) {
+      const bodyText = await resp.text().catch(() => '');
+      return {
+        success: false,
+        error: `Cloudflare Images respondió ${resp.status}: ${bodyText.slice(0, 150) || 'sin detalles'}`,
+      };
+    }
     const data = await resp.json();
-
     if (!data.success) {
       return { success: false, error: data.errors?.[0]?.message || 'Upload failed' };
     }
-
     return {
       success: true,
       id: data.result.id,
