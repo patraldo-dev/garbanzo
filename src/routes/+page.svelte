@@ -135,6 +135,18 @@
     <img src={img(photos[0].id, 'cover')} alt={photos[0].alt} class="hero-img" />
   </section>
 
+<!-- REPORT SIGHTING CTA -->
+  <section class="card report-cta">
+    <h2>📸 ¿Creés verlo?</h2>
+    <p class="help-text">
+      Si viste un gato gris y blanco por la zona, <strong>sube una foto</strong>.
+      Nuestro sistema verifica automáticamente que coincida con Garbanzo.
+    </p>
+    <a href="/report" class="btn btn-report">
+      📷 Reportar avistamiento
+    </a>
+  </section>
+
   <!-- REWARD -->
   <div class="reward">
     💰 SE OFRECE RECOMPENSA 💰
@@ -212,19 +224,7 @@
       {/each}
     </div>
   </section>
-
-  <!-- REPORT SIGHTING CTA -->
-  <section class="card report-cta">
-    <h2>📸 ¿Creés verlo?</h2>
-    <p class="help-text">
-      Si viste un gato gris y blanco por la zona, <strong>sube una foto</strong>.
-      Nuestro sistema verifica automáticamente que coincida con Garbanzo.
-    </p>
-    <a href="/report" class="btn btn-report">
-      📷 Reportar avistamiento
-    </a>
-  </section>
-
+  
   <!-- HELP -->
   <section class="card help-card">
     <h2>🙏 Ayúdanos</h2>
