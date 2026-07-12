@@ -110,7 +110,8 @@
   {#if result?.success}
     <div class="alert alert-success">
       ✅ {result.message}
-      <p class="alert-sub">Puedes cerrar esta página o <a href="/report">enviar otro reporte</a>.</p>
+      <p class="alert-sub">Puedes cerrar esta página o <button type="button" class="link-btn" onclick={() => { result = null; }}>enviar otro reporte</button>.
+    </p> 
     </div>
   {:else}
     <form onsubmit={(e) => { e.preventDefault(); submitReport(); }} class="report-form">
@@ -373,6 +374,16 @@
     color: #856404;
     border: 1px solid #ffeaa7;
   }
+
+.link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+  font: inherit;
+}
 
   .alert-sub {
     margin-top: 8px;
