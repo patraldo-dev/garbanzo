@@ -21,9 +21,10 @@ const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
 const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif'];
 
 /** @type {import('./$types').RequestHandler} */
-export async function POST({ request, env, getClientAddress }) {
-  let ipHash = 'unknown';
+export async function POST({ request, platform, getClientAddress }) {
+  const env = platform?.env || {};
 
+  let ipHash = 'unknown';
   try {
     ipHash = hashIp(getClientAddress());
   } catch {
@@ -93,7 +94,6 @@ export async function POST({ request, env, getClientAddress }) {
   if (env.AI) {
     aiResult = await validateCatImage(imageData, env.AI);
   } else {
-    // No AI binding — auto-accept but flag as unverified
     aiResult = {
       verdict: 'unsure',
       description: 'AI validation unavailable',
@@ -114,7 +114,6 @@ export async function POST({ request, env, getClientAddress }) {
     status = 'rejected';
     rejected = true;
   } else if (extortionScan.flagged) {
-    // Don't auto-reject — flag for manual review
     status = 'flagged';
   }
 
@@ -128,22 +127,13 @@ export async function POST({ request, env, getClientAddress }) {
         `INSERT INTO sightings (id, image_id, image_url, reporter_name, reporter_contact, location, notes, ai_verdict, ai_description, ai_confidence, ip_hash, status)
          VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
       ).bind(
-        id,
-        upload.id,
-        imageUrl,
-        reporterName,
-        reporterContact,
-        location,
-        notes,
-        aiResult.verdict,
-        aiResult.description,
-        aiResult.confidence,
-        ipHash,
-        status
+        id, upload.id, imageUrl,
+        reporterName, reporterContact, location, notes,
+        aiResult.verdict, aiResult.description, aiResult.confidence,
+        ipHash, status
       ).run();
     } catch (dbErr) {
       console.error('D1 insert error:', dbErr);
-      // Still return success — the photo was uploaded
     }
   }
 
@@ -169,7 +159,6 @@ export async function POST({ request, env, getClientAddress }) {
 }
 
 /**
- * Verify a Turnstile token.
  * @param {string} token
  * @param {string} secret
  * @param {string} ip
@@ -177,11 +166,9 @@ export async function POST({ request, env, getClientAddress }) {
  */
 async function verifyTurnstile(token, secret, ip) {
   if (!token) return false;
-
   try {
     const body = new URLSearchParams({ secret, response: token });
     if (ip) body.set('remoteip', ip);
-
     const resp = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
       method: 'POST',
       body,
@@ -194,7 +181,6 @@ async function verifyTurnstile(token, secret, ip) {
 }
 
 /**
- * JSON response helper.
  * @param {any} data
  * @param {number} status
  * @returns {Response}

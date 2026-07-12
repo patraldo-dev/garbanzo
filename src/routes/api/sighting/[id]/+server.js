@@ -3,7 +3,8 @@
  */
 
 /** @type {import('./$types').RequestHandler} */
-export async function PATCH({ params, request, env }) {
+export async function PATCH({ params, request, platform }) {
+  const env = platform?.env || {};
   const adminToken = env.ADMIN_TOKEN || '';
   const body = await request.json();
   const token = body.token || '';

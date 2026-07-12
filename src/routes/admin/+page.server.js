@@ -1,29 +1,27 @@
 /**
  * Admin view server — loads sightings from D1.
- * Protected by ADMIN_TOKEN query param or Authorization header.
+ * Protected by ADMIN_TOKEN query param.
  */
 
 import { imgUrl } from '$lib/server/config.js';
 
 /** @type {import('./$types').PageServerLoad} */
-export async function load({ url, env, request }) {
-  // Auth check: ?token=XXX or Authorization: Bearer XXX
+export async function load({ url, platform }) {
+  // Auth check
   const token = url.searchParams.get('token') || '';
-  const authHeader = request.headers.get('Authorization') || '';
-  const bearerToken = authHeader.replace('Bearer ', '');
+  const adminToken = platform?.env?.ADMIN_TOKEN || '';
 
-  const adminToken = env.ADMIN_TOKEN || '';
-
-  if (!adminToken || (token !== adminToken && bearerToken !== adminToken)) {
+  if (!adminToken || token !== adminToken) {
     return { authorized: false, sightings: [] };
   }
 
-  if (!env.DB) {
+  const db = platform?.env?.DB;
+  if (!db) {
     return { authorized: true, sightings: [], dbError: true };
   }
 
   try {
-    const { results } = await env.DB.prepare(
+    const { results } = await db.prepare(
       `SELECT * FROM sightings ORDER BY created_at DESC LIMIT 100`
     ).all();
 
