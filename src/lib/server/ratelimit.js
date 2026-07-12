@@ -3,7 +3,7 @@
  * Limits per IP: max 3 uploads per hour, 10 per day.
  */
 
-const HOUR_LIMIT = 15;
+const HOUR_LIMIT = 25;
 const DAY_LIMIT = 50;
 const HOUR_MS = 60 * 60 * 1000;
 const DAY_MS = 24 * 60 * 60 * 1000;
