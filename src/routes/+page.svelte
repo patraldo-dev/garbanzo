@@ -111,6 +111,33 @@
     }
   }
 
+  // Offer the QR PNG for download so people can repost it (Instagram, WhatsApp, email).
+  async function downloadQr() {
+    try {
+      const res = await fetch('/qr-garbanzo.png');
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'garbanzo-qr.png';
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+    } catch {
+      window.open('/qr-garbanzo.png', '_blank');
+    }
+  }
+
+  async function copyLink() {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      alert('¡Link copiado! Pégalo en WhatsApp, Instagram o correo.');
+    } catch {
+      window.prompt('Copia este link:', window.location.href);
+    }
+  }
+
   /**
    * @param {KeyboardEvent} e
    */
@@ -246,6 +273,22 @@
     <button class="btn btn-share" onclick={sharePage}>
       📤 Compartir esta página
     </button>
+  </section>
+
+  <!-- SHARE QR -->
+  <section class="card share-card">
+    <h2>📲 Comparte este aviso</h2>
+    <p class="help-text">
+      Escanea el código o <strong>descárgalo</strong> y compártelo por Instagram, WhatsApp o correo.
+      Apunta a <strong>garbanzo.patraldo.com</strong>.
+    </p>
+    <div class="share-qr">
+      <img src="/qr-garbanzo.png" alt="Código QR de garbanzo.patraldo.com" width="200" height="200" class="qr-img" />
+      <div class="share-qr-actions">
+        <button class="btn btn-report" onclick={downloadQr}>⬇️ Descargar QR</button>
+        <button class="btn btn-share" onclick={copyLink}>🔗 Copiar link</button>
+      </div>
+    </div>
   </section>
 
   <footer class="footer">
@@ -549,6 +592,36 @@
   .help-card {
     background: #fff3cd;
     border: 2px solid #ffc107;
+  }
+
+  .share-card {
+    background: #e9fbff;
+    border: 2px solid #7fd8eb;
+  }
+
+  .share-qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    margin-top: 12px;
+  }
+
+  .qr-img {
+    width: 200px;
+    height: 200px;
+    image-rendering: pixelated;
+    background: white;
+    padding: 8px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .share-qr-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
   }
 
   .help-text {
