@@ -99,6 +99,24 @@ const POSTER_HTML = `<!DOCTYPE html>
   .contact .addr { font-size: 1.2rem; font-weight: 900; margin-top: 4px; }
   .contact .note { font-size: 1rem; font-weight: 700; margin-top: 8px; line-height: 1.3; }
 
+  .qr-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .qr-section img {
+    width: 1.1in;
+    height: 1.1in;
+  }
+  .qr-section .qr-text {
+    font-size: 0.95rem;
+    font-weight: 900;
+    text-align: left;
+    line-height: 1.3;
+  }
+
   @media print {
     html, body { width: 10in; height: 7.5in; overflow: hidden; }
   }
@@ -145,6 +163,16 @@ const POSTER_HTML = `<!DOCTYPE html>
       <div class="web">garbanzo.patraldo.com</div>
       <div class="addr">Pedro Antonio Buzeta 277, Santa Tere</div>
       <div class="note">No lo persigas. Tómale una foto y mándala al número. ¡GRACIAS!</div>
+
+      <div class="qr-section">
+        <img src="https://garbanzo.patraldo.com/qr-garbanzo.png" alt="Código QR">
+        <div class="qr-text">
+          Escanea para ver<br>
+          fotos y reportar<br>
+          un avistamiento<br>
+          <strong>garbanzo.patraldo.com</strong>
+        </div>
+      </div>
     </div>
   </div>
 </div>
