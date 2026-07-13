@@ -1,0 +1,7 @@
+/* Global reset — border-box so width:100% elements (e.g. .btn) don't overflow
+   their containers when combined with padding. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

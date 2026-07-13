@@ -162,9 +162,7 @@
 <svelte:window on:keydown={handleKeydown} />
 
 <div class="banner">
-  <span class="dot"></span>
   Gato perdido · Santa Tere, Guadalajara
-  <span class="dot"></span>
 </div>
 
 <div class="container">
@@ -334,29 +332,6 @@
     top: 0;
     z-index: 100;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .dot {
-    width: 10px;
-    height: 10px;
-    background: white;
-    border-radius: 50%;
-    animation: pulse 1s infinite;
-  }
-
-  @keyframes pulse {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.3;
-    }
   }
 
   .container {
