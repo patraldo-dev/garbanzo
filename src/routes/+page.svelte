@@ -121,14 +121,14 @@
 
 <svelte:head>
   <title>⚠️ SE BUSCA: Garbanzo — Gato Perdido en Santa Tere</title>
-  <meta name="description" content="Garbanzo se perdió la noche del 3 de julio de 2026 en Santa Tere, Guadalajara. Blanco con gris, collar Rogz amarillo. SE OFRECE RECOMPENSA." />
+  <meta name="description" content="Garbanzo, gato perdido en Santa Tere, Guadalajara. Blanco con gris, collar Rogz amarillo. SE OFRECE RECOMPENSA." />
   <meta property="og:title" content="⚠️ SE BUSCA: Garbanzo — Gato Perdido" />
-  <meta property="og:description" content="Perdido desde el 3 de julio en Pedro Buzeta #277, Santa Tere. Blanco con gris, collar Rogz amarillo. Recompensa." />
+  <meta property="og:description" content="Perdido en Pedro Buzeta #277, Santa Tere. Blanco con gris, collar Rogz amarillo. Recompensa." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content={img(photos[0].id, 'cover')} />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="⚠️ SE BUSCA: Garbanzo — Gato Perdido" />
-  <meta name="twitter:description" content="Perdido desde el 3 de julio en Santa Tere, GDL. Recompensa." />
+  <meta name="twitter:description" content="Perdido en Santa Tere, GDL. Recompensa." />
   <meta name="twitter:image" content={img(photos[0].id, 'cover')} />
 </svelte:head>
 
@@ -183,10 +183,6 @@
       <div class="detail">
         <div class="label">Nombre</div>
         <div class="value">Garbanzo</div>
-      </div>
-      <div class="detail">
-        <div class="label">Perdido desde</div>
-        <div class="value">3 de julio 2026</div>
       </div>
     </div>
     <p class="description">
