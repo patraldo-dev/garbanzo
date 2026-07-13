@@ -533,6 +533,7 @@
     border: none;
     cursor: pointer;
     width: 100%;
+    max-width: 100%;
     text-align: center;
   }
 
@@ -557,6 +558,12 @@
 
   .btn-icon {
     font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  .btn-text {
+    min-width: 0;
+    word-break: break-word;
   }
 
   .btn-detail {
