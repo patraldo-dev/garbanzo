@@ -41,13 +41,6 @@
   /** @type {Contact[]} */
   const contacts = [
     {
-      label: 'WhatsApp: Cris',
-      detail: '+1 860 354 1401',
-      href: 'https://wa.me/18603541401',
-      icon: '💬',
-      color: '#25d366',
-    },
-    {
       label: 'WhatsApp: Antonio',
       detail: '33 3355 5670',
       href: 'https://wa.me/523333555670',
