@@ -242,7 +242,7 @@
   <section class="card">
     <h2>📞 Contacto</h2>
     <p class="contact-note">
-      Si lo ves, <strong>no lo persigas</strong>. Llámanos de inmediato.
+      Si lo ves, sube una foto y <strong>llámanos de inmediato</strong>.
     </p>
     <div class="contact-buttons">
       {#each contacts as c (c.href)}
