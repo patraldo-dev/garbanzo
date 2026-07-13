@@ -73,6 +73,20 @@
   /** @type {string | null} */
   let lightboxSrc = $state(null);
 
+  // "Seguimos buscando hoy <día> <fecha> de <mes>" — computed client-side so the
+  // page always shows the current date. SSR renders the static fallback below.
+  /** @type {string} */
+  let buscandoHoy = $state('Seguimos buscando');
+  $effect(() => {
+    const dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+    const meses = [
+      'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+      'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre',
+    ];
+    const hoy = new Date();
+    buscandoHoy = `Seguimos buscando hoy ${dias[hoy.getDay()]} ${hoy.getDate()} de ${meses[hoy.getMonth()]}`;
+  });
+
   /**
    * @param {string} src
    */
@@ -129,6 +143,7 @@
 <div class="container">
   <!-- HERO -->
   <section class="hero">
+    <div class="buscando-hoy">{buscandoHoy}</div>
     <div class="lost-badge">🚨 Se Busca · Recompensa 🚨</div>
     <h1>GARBANZO</h1>
     <p class="subtitle">Gatito perdido en Santa Tere, Guadalajara</p>
@@ -314,6 +329,14 @@
   .hero {
     text-align: center;
     padding: 24px 0 16px;
+  }
+
+  .buscando-hoy {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--text);
+    text-align: center;
+    margin-bottom: 0.5rem;
   }
 
   .hero h1 {
