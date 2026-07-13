@@ -136,7 +136,7 @@
 
 <div class="banner">
   <span class="dot"></span>
-  GATO PERDIDO DESDE EL 3 DE JULIO · SANTA TERE, GDL
+  Gato perdido · Santa Tere, Guadalajara
   <span class="dot"></span>
 </div>
 
