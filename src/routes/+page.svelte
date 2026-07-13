@@ -162,7 +162,7 @@
 <svelte:window on:keydown={handleKeydown} />
 
 <div class="banner">
-  Gato perdido · Santa Tere, Guadalajara
+  Gato perdido · Santa Tere, GDL
 </div>
 
 <div class="container">
