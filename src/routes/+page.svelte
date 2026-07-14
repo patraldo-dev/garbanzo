@@ -164,7 +164,6 @@
     <div class="buscando-hoy">{buscandoHoy}</div>
     <div class="lost-badge">🚨 Se Busca · Recompensa 🚨</div>
     <h1>GARBANZO</h1>
-    <p class="subtitle">Gatito perdido en Santa Tere, Guadalajara</p>
     <img src={img(photos[0].id, 'cover')} alt={photos[0].alt} class="hero-img" />
   </section>
 
