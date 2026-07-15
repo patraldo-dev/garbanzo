@@ -33,7 +33,7 @@
     { id: '82c74653-8a73-4adc-f9a1-971dbab86100', alt: 'Garbanzo mojado en la azotea' },
     { id: '581c7919-2931-4422-c367-34dc24641100', alt: 'Garbanzo en con mamachita sofá' },
     { id: 'a49d77ec-9253-4503-c4aa-e904ad149c00', alt: 'Garbanzo dormiendo hacia la cámara en el sofá' },
-    { id: ''0d162b1f-0060-4d03-fd7d-e9c0f0881e00, alt: 'Garbanzo con amigos en la azotea' },
+    { id: '0d162b1f-0060-4d03-fd7d-e9c0f0881e00', alt: 'Garbanzo con amigos en la azotea' },
     { id: 'd896cb53-03e1-4f9b-4686-b42f8d045000', alt: 'Garbanzo durmiendo en el sofá' },
     { id: 'cd30e247-9b50-49b2-a5d6-72836cc50700', alt: 'Garbanzo durmiendo en el su palacio' },
     { id: '689f24a8-5133-404c-8ed4-bb6dc348ca00', alt: 'Garbanzo durmiendo con Rosty' },
