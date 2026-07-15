@@ -30,6 +30,7 @@
   /** @type {Photo[]} */
   const photos = [
     { id: '6094109c-4045-4f7a-b1ce-21769d89ee00', alt: 'Garbanzo adorable de cerca dormido', primary: true },
+    { id: '82c74653-8a73-4adc-f9a1-971dbab86100', alt: 'Garbanzo mojado en la azotea' },
     { id: '581c7919-2931-4422-c367-34dc24641100', alt: 'Garbanzo en con mamachita sofá' },
     { id: 'a49d77ec-9253-4503-c4aa-e904ad149c00', alt: 'Garbanzo dormiendo hacia la cámara en el sofá' },
     { id: 'd896cb53-03e1-4f9b-4686-b42f8d045000', alt: 'Garbanzo durmiendo en el sofá' },
