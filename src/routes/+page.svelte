@@ -37,7 +37,7 @@
     { id: 'd896cb53-03e1-4f9b-4686-b42f8d045000', alt: 'Garbanzo durmiendo en el sofá' },
     { id: 'cd30e247-9b50-49b2-a5d6-72836cc50700', alt: 'Garbanzo durmiendo en el su palacio' },
     { id: '689f24a8-5133-404c-8ed4-bb6dc348ca00', alt: 'Garbanzo durmiendo con Rosty' },
-    { id: '689f24a8-5133-404c-8ed4-bb6dc348ca00', alt: 'Garbanzo durmiendo en su camita' },
+    { id: '821d56c1-d23a-4a9a-27dc-a3a064207400', alt: 'Garbanzo durmiendo en su camita' },
     { id: 'dc6bdc22-529e-412e-e9c5-cc5580282700', alt: 'Garbanzo en el jardín' },
     { id: '225137e0-9cc6-4f6e-8527-d8af2523ee00', alt: 'Garbanzo olfateando el pasto' },
     { id: '055e9b2d-a1ee-430b-f206-321f15869400', alt: 'Garbanzo caminando' },
