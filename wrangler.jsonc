@@ -25,7 +25,7 @@
     "CF_ACCESS_AUD": "387c6b8390a094babe8f656344d1024732a32ca3264a946a7a3d5523483ac383",
     // Set to true to log why an Access JWT was rejected (non-secret diagnostics
     // only — iss/aud/exp/kid/alg). Off by default. See access.js.
-    "CF_ACCESS_DEBUG": true
+    "CF_ACCESS_DEBUG": false
   },
   "d1_databases": [
     {

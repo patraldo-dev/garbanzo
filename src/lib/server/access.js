@@ -75,8 +75,11 @@ const certCache = {};
 
 /**
  * Fetch and cache Cloudflare Access public keys for a team.
+ * The certs endpoint returns several representations; we use the `keys`
+ * array, which contains proper JWKs that Web Crypto imports directly —
+ * avoiding fragile PEM/X.509 parsing.
  * @param {string} team
- * @returns {Promise<any[]>} array of JWK-like key objects from the certs endpoint
+ * @returns {Promise<any[]>} array of JWK objects ({ kid, kty, alg, n, e, ... })
  */
 async function getTeamKeys(team) {
   const now = Date.now();
@@ -92,7 +95,9 @@ async function getTeamKeys(team) {
     const res = await fetch(`https://${team}.cloudflareaccess.com/cdn-cgi/access/certs`);
     if (!res.ok) throw new Error(`certs endpoint ${res.status}`);
     const data = await res.json();
-    const keys = Array.isArray(data?.public_certs) ? data.public_certs : [];
+    // Prefer the JWK `keys` array; fall back to `public_certs` (not importable
+    // as-is, but kept for diagnostics). We only return JWKs here.
+    const keys = Array.isArray(data?.keys) ? data.keys : [];
     certCache[team] = { keys, fetchedAt: now };
     return keys;
   })();
@@ -140,45 +145,31 @@ export async function verifyAccessJwt(assertion, cfg) {
     return fail('aud mismatch', { expected: cfg.aud, got: payload.aud });
   }
 
-  // Find the matching public key by kid.
+  // Find the matching JWK by kid.
   let keys;
   try {
     keys = await getTeamKeys(cfg.team);
   } catch (err) {
     return fail('certs fetch failed', { error: String(err) });
   }
-  const match = keys.find((k) => (header.kid && k.kid === header.kid) || !header.kid);
+  const match = header.kid
+    ? keys.find((k) => k.kid === header.kid)
+    : keys[0];
   if (!match) {
     return fail('no matching key for kid', { kid: header.kid, keyCount: keys.length });
   }
 
-  // Prefer a JWK; fall back to a DER-encoded cert (SPKI).
+  // Import the JWK as a verify-only RS256 key.
   /** @type {CryptoKey} */
   let cryptoKey;
   try {
-    if (match.jwk) {
-      cryptoKey = await crypto.subtle.importKey(
-        'jwk',
-        match.jwk,
-        { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' },
-        false,
-        ['verify'],
-      );
-    } else if (match.cert) {
-      // The certs endpoint returns the public key as base64-encoded DER (SPKI).
-      const bin = atob(match.cert);
-      const der = new Uint8Array(bin.length);
-      for (let i = 0; i < bin.length; i++) der[i] = bin.charCodeAt(i);
-      cryptoKey = await crypto.subtle.importKey(
-        'spki',
-        der,
-        { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' },
-        false,
-        ['verify'],
-      );
-    } else {
-      return fail('key entry has no jwk or cert');
-    }
+    cryptoKey = await crypto.subtle.importKey(
+      'jwk',
+      match,
+      { name: 'RSASSA-PKCS1-v1_5', hash: 'SHA-256' },
+      false,
+      ['verify'],
+    );
   } catch (err) {
     return fail('key import failed', { error: String(err) });
   }
