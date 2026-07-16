@@ -168,9 +168,9 @@
 <div class="container">
   <!-- HERO -->
   <section class="hero">
-    <div class="buscando-hoy">{buscandoHoy}</div>
     <div class="lost-badge">🚨 Se Busca · Recompensa 🚨</div>
     <h1>GARBANZO</h1>
+    <div class="buscando-hoy">{buscandoHoy}</div>
     <img src={img(photos[0].id, 'cover')} alt={photos[0].alt} class="hero-img" />
   </section>
 
@@ -341,15 +341,15 @@
 
   .hero {
     text-align: center;
-    padding: 24px 0 16px;
+    padding: 16px 0 12px;
   }
 
   .buscando-hoy {
-    font-size: 1.6rem;
-    font-weight: 800;
+    font-size: 1.65rem;
+    font-weight: 700;
     color: var(--text);
     text-align: center;
-    margin-bottom: 0.5rem;
+    margin: 2px 0 10px;
   }
 
   .hero h1 {
@@ -357,6 +357,7 @@
     font-weight: 900;
     color: var(--alert-dark);
     line-height: 1.15;
+    margin: 0 0 0;
   }
 
   .subtitle {
@@ -380,7 +381,7 @@
     border-radius: 999px;
     font-weight: 700;
     font-size: 0.85rem;
-    margin-bottom: 16px;
+    margin-bottom: 6px;
     text-transform: uppercase;
     letter-spacing: 1px;
   }
