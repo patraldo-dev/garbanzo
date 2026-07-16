@@ -58,11 +58,21 @@
       <div class="lock">🔒</div>
       <h1>Acceso restringido</h1>
       <p>
-        Esta página está protegida por Cloudflare Access. Inicia sesión con una
-        cuenta autorizada para ver las estadísticas de visitantes.
+        Esta página está protegida por Cloudflare Access. Cuando la política está
+        activa para <code>/tracking</code>, Access muestra su propia pantalla de
+        inicio de sesión <em>antes</em> de llegar aquí.
       </p>
-      <a class="btn" href="/tracking">Reintentar</a>
-      <p class="hint">Si llegaste aquí sin una pantalla de login, la política de Access no cubre esta ruta.</p>
+      <p class="why">
+        Si estás viendo este mensaje en lugar de esa pantalla, significa que Access
+        aún no cubre esta ruta (no tiene una política guardada, o el código aún no
+        está desplegado). Recargar no iniciará sesión — la autenticación ocurre en
+        el borde de Cloudflare, no en la app.
+      </p>
+      <a class="btn" href="/tracking">Recargar la página</a>
+      <p class="hint">
+        ¿En localhost? En desarrollo no hay borde de Access, así que esta puerta
+        siempre aparece. Prueba en <strong>garbanzo.patraldo.com/tracking</strong>.
+      </p>
     </div>
   </div>
 {:else if data.dbError || !data.stats}
@@ -249,7 +259,9 @@
   }
   .lock { font-size: 3rem; }
   .gate-card h1 { margin: 12px 0 8px; font-size: 1.4rem; }
-  .gate-card p { color: #555; margin: 0 0 20px; line-height: 1.5; }
+  .gate-card p { color: #555; margin: 0 0 12px; line-height: 1.5; }
+  .gate-card p.why { font-size: 0.85rem; color: #777; margin: 0 0 16px; }
+  .gate-card code { background: #f0f0f0; padding: 1px 5px; border-radius: 4px; font-size: 0.9em; }
   .gate-card .btn {
     display: inline-block;
     background: #e63946;

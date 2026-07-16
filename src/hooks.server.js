@@ -69,14 +69,16 @@ export async function handle({ event, resolve }) {
 
   // The Cloudflare adapter throws (not returns undefined) when env bindings
   // are accessed in a prerenderable route, so resolve everything defensively.
+  // `waitUntil` must be bound to its `context` — calling it unbound throws
+  // "Illegal invocation" on the Workers runtime.
   /** @type {any} */
   let db = null;
   /** @type {((p: any) => void) | undefined} */
   let waitUntil;
   try {
-    if (platform?.env?.DB) {
+    if (platform?.env?.DB && platform?.context?.waitUntil) {
       db = platform.env.DB;
-      waitUntil = platform.context?.waitUntil;
+      waitUntil = platform.context.waitUntil.bind(platform.context);
     }
   } catch {
     // Prerenderable route or platform unavailable — nothing to log.
