@@ -16,7 +16,16 @@
   "vars": {
     "ADMIN_EMAIL": "garbanzo@patraldo.com",
     "MAILGUN_FROM": "Garbanzo <noreply@patraldo.com>",
-    "MAILGUN_DOMAIN": "patraldo.com"
+    "MAILGUN_DOMAIN": "patraldo.com",
+    // Cloudflare Access (Zero Trust) — gate for /tracking. Not secret; the real
+    // gate is enforced at the edge by Access. These enable app-level JWT
+    // verification as defense-in-depth. Replace with your team subdomain and
+    // the Access application's AUD tag.
+    "CF_ACCESS_TEAM": "patraldo",
+    "CF_ACCESS_AUD": "387c6b8390a094babe8f656344d1024732a32ca3264a946a7a3d5523483ac383",
+    // Set to true to log why an Access JWT was rejected (non-secret diagnostics
+    // only — iss/aud/exp/kid/alg). Off by default. See access.js.
+    "CF_ACCESS_DEBUG": false
   },
   "d1_databases": [
     {
