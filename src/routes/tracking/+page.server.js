@@ -10,6 +10,7 @@
  */
 
 import { verifyAccessJwt } from '#lib/server/access.js';
+import { env } from 'cloudflare:workers';
 
 /** @typedef {{ label: string, count: number }} Bucket */
 
@@ -42,10 +43,10 @@ export async function load({ platform, request }) {
   /** @type {any} */
   let db = null;
   try {
-    team = platform?.env?.CF_ACCESS_TEAM || '';
-    aud = platform?.env?.CF_ACCESS_AUD || '';
-    debug = !!platform?.env?.CF_ACCESS_DEBUG;
-    db = platform?.env?.DB || null;
+    team = env?.CF_ACCESS_TEAM || '';
+    aud = env?.CF_ACCESS_AUD || '';
+    debug = !!env?.CF_ACCESS_DEBUG;
+    db = env?.DB || null;
   } catch {
     // Prerenderable route or platform unavailable.
   }

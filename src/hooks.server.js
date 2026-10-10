@@ -13,6 +13,7 @@
  */
 
 import { generateId, hashIp } from '#lib/server/config.js';
+import { env, waitUntil } from 'cloudflare:workers';
 
 /** Paths we never log. */
 const EXCLUDED_PREFIXES = ['/api/', '/admin', '/tracking'];
@@ -65,7 +66,6 @@ function shouldTrack(method, path, accept) {
 /** @type {import('@sveltejs/kit/hooks').Handle} */
 export async function handle({ event, resolve }) {
   const req = event.request;
-  const platform = event.platform;
 
   // The Cloudflare adapter throws (not returns undefined) when env bindings
   // are accessed in a prerenderable route, so resolve everything defensively.
@@ -73,12 +73,9 @@ export async function handle({ event, resolve }) {
   // "Illegal invocation" on the Workers runtime.
   /** @type {any} */
   let db = null;
-  /** @type {((p: any) => void) | undefined} */
-  let waitUntil;
   try {
-    if (platform?.env?.DB && platform?.context?.waitUntil) {
-      db = platform.env.DB;
-      waitUntil = platform.context.waitUntil.bind(platform.context);
+    if (env?.DB) {
+      db = env.DB;
     }
   } catch {
     // Prerenderable route or platform unavailable — nothing to log.
@@ -87,7 +84,7 @@ export async function handle({ event, resolve }) {
   const path = event.url.pathname;
   const accept = req.headers.get('accept') || '';
 
-  if (db && waitUntil && shouldTrack(req.method, path, accept)) {
+  if (db && shouldTrack(req.method, path, accept)) {
     const cf = /** @type {any} */ (event.request.cf || {});
     const ua = req.headers.get('user-agent') || '';
     const referrer = req.headers.get('referer') || '';

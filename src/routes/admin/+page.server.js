@@ -4,17 +4,18 @@
  */
 
 import { imgUrl } from '#lib/server/config.js';
+import { env } from 'cloudflare:workers';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ url, platform }) {
   const token = url.searchParams.get('token') || '';
-  const env = platform?.env || {};
+  const env = env || {};
   const adminToken = env.ADMIN_TOKEN || '';
 
   // Debug: remove after testing
   console.log('Admin auth check:', {
     hasPlatform: !!platform,
-    hasEnv: !!platform?.env,
+    hasEnv: !!env,
     tokenProvided: token.slice(0, 8) + '...',
     hasAdminToken: !!adminToken,
     match: token === adminToken,

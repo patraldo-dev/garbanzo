@@ -17,6 +17,7 @@ import { validateCatImage, scanForExtortion } from '#lib/server/ai-filter.js';
 import { checkRateLimit, incrementRateLimit } from '#lib/server/ratelimit.js';
 import { generateId, hashIp, imgUrl } from '#lib/server/config.js';
 import { notifyNewSighting } from '#lib/server/notify.js';
+import { env } from 'cloudflare:workers';
 
 
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
@@ -24,7 +25,7 @@ const ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'i
 
 /** @type {import('./$types').RequestHandler} */
 export async function POST({ request, platform, getClientAddress }) {
-  const env = platform?.env || {};
+  const env = env || {};
 
   let ipHash = 'unknown';
   try {

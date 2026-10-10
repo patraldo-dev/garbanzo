@@ -1,10 +1,11 @@
+import { env } from 'cloudflare:workers';
 /**
  * PATCH /api/sighting/[id] — Update sighting status (admin only).
  */
 
 /** @type {import('./$types').RequestHandler} */
 export async function PATCH({ params, request, platform }) {
-  const env = platform?.env || {};
+  const env = env || {};
   const adminToken = env.ADMIN_TOKEN || '';
   const body = await request.json();
   const token = body.token || '';
