@@ -3,7 +3,7 @@
  * Protected by ADMIN_TOKEN query param.
  */
 
-import { imgUrl } from '$lib/server/config.js';
+import { imgUrl } from '#lib/server/config.js';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ url, platform }) {

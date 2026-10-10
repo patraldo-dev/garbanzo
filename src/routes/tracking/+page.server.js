@@ -9,7 +9,7 @@
  * Returns aggregate stats computed in D1; no per-row export.
  */
 
-import { verifyAccessJwt } from '$lib/server/access.js';
+import { verifyAccessJwt } from '#lib/server/access.js';
 
 /** @typedef {{ label: string, count: number }} Bucket */
 

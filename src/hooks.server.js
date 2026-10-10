@@ -12,7 +12,7 @@
  *   - /api, /admin, /tracking (keep the owner's own activity out of the data)
  */
 
-import { generateId, hashIp } from '$lib/server/config.js';
+import { generateId, hashIp } from '#lib/server/config.js';
 
 /** Paths we never log. */
 const EXCLUDED_PREFIXES = ['/api/', '/admin', '/tracking'];
@@ -26,8 +26,8 @@ const STATIC_EXT = /\.(?:js|css|woff2?|ttf|png|jpe?g|webp|gif|svg|ico|avif|map|j
  * @returns {'mobile' | 'tablet' | 'desktop'}
  */
 function classifyDevice(ua) {
-  if (/tablet|ipad/i.test(ua)) return 'tablet';
-  if (/mobi|android|iphone|ipod/i.test(ua)) return 'mobile';
+  if ((/tablet|ipad/i).test(ua)) return 'tablet';
+  if ((/mobi|android|iphone|ipod/i).test(ua)) return 'mobile';
   return 'desktop';
 }
 
@@ -37,11 +37,11 @@ function classifyDevice(ua) {
  * @returns {string}
  */
 function classifyBrowser(ua) {
-  if (/edg/i.test(ua)) return 'Edge';
-  if (/opr|opera/i.test(ua)) return 'Opera';
-  if (/chrome|crios/i.test(ua)) return 'Chrome';
-  if (/firefox|fxios/i.test(ua)) return 'Firefox';
-  if (/safari/i.test(ua)) return 'Safari';
+  if ((/edg/i).test(ua)) return 'Edge';
+  if ((/opr|opera/i).test(ua)) return 'Opera';
+  if ((/chrome|crios/i).test(ua)) return 'Chrome';
+  if ((/firefox|fxios/i).test(ua)) return 'Firefox';
+  if ((/safari/i).test(ua)) return 'Safari';
   return 'Other';
 }
 
@@ -62,7 +62,7 @@ function shouldTrack(method, path, accept) {
   return true;
 }
 
-/** @type {import('@sveltejs/kit').Handle} */
+/** @type {import('@sveltejs/kit/hooks').Handle} */
 export async function handle({ event, resolve }) {
   const req = event.request;
   const platform = event.platform;
@@ -88,7 +88,7 @@ export async function handle({ event, resolve }) {
   const accept = req.headers.get('accept') || '';
 
   if (db && waitUntil && shouldTrack(req.method, path, accept)) {
-    const cf = /** @type {any} */ (event.request).cf || {};
+    const cf = /** @type {any} */ (event.request.cf || {});
     const ua = req.headers.get('user-agent') || '';
     const referrer = req.headers.get('referer') || '';
 
